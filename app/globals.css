@@ -114,6 +114,46 @@ body {
     width: 95%; /* Full width on mobile */
     max-width: none; /* Remove max-width constraint */
   }
+
+  .app-container {
+    padding: 0.25rem; /* Further reduce padding on mobile */
+    padding-bottom: 0.5rem; /* Reduce bottom padding significantly */
+  }
+
+  .questions-section {
+    margin-bottom: 0.25rem; /* Reduce space between questions and chatbot */
+  }
+
+  .title {
+    font-size: clamp(1.2rem, 5vw, 2rem); /* Smaller max on mobile */
+  }
+
+  .section-title {
+    font-size: clamp(0.9rem, 3vw, 1.2rem); /* Smaller max on mobile */
+  }
+
+  .cards-container {
+    gap: 0.25rem; /* Reduce gap on mobile */
+  }
+
+  .card {
+    padding: 0.5rem; /* Reduce padding on mobile */
+  }
+
+  .input-bar {
+    gap: 0.25rem; /* Further reduce gap */
+  }
+
+  .send-button {
+    width: 3rem; /* Maintain minimum touch target */
+    height: 3rem;
+    margin-left: 0.25rem; /* Reduce margin for mobile */
+  }
+
+  .disclaimer {
+    font-size: clamp(0.5rem, 2vw, 0.7rem); /* Smaller min on mobile */
+    margin-top: 0.25rem; /* Reduce gap above disclaimer */
+  }
 }
 
 .input-bar {
@@ -208,42 +248,4 @@ body {
   margin: 0.5rem 0; /* Reduced space around the line */
   width: 100%; /* Full width */
   opacity: 0.5; /* Subtle visibility */
-}
-
-/* Additional Mobile Adjustments */
-@media (max-width: 768px) {
-  .app-container {
-    padding: 0.5rem; /* Reduce padding on mobile */
-    padding-bottom: 1rem; /* Reduce bottom padding */
-  }
-
-  .title {
-    font-size: clamp(1.2rem, 5vw, 2rem); /* Smaller max on mobile */
-  }
-
-  .section-title {
-    font-size: clamp(0.9rem, 3vw, 1.2rem); /* Smaller max on mobile */
-  }
-
-  .cards-container {
-    gap: 0.5rem; /* Reduce gap on mobile */
-  }
-
-  .card {
-    padding: 0.75rem; /* Reduce padding on mobile */
-  }
-
-  .input-bar {
-    gap: 0.5rem; /* Further reduce gap */
-  }
-
-  .send-button {
-    width: 3rem; /* Maintain minimum touch target */
-    height: 3rem;
-    margin-left: 0.5rem; /* Reduce margin for mobile */
-  }
-
-  .disclaimer {
-    font-size: clamp(0.5rem, 2vw, 0.7rem); /* Smaller min on mobile */
-  }
 }

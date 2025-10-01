@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Car, DollarSign, Clock, AlertTriangle, TrendingUp, Send } from 'lucide-react';
+import Head from 'next/head'; // Ensure viewport meta tag
 
 export default function Home() {
   const [inputText, setInputText] = useState<string>('Ask WizeBot about finance...');
@@ -26,9 +27,9 @@ export default function Home() {
   };
 
   const handleSendClick = () => {
-    if (isEditing && inputText.trim() !== 'Ask wealthBot about finance...') {
+    if (isEditing && inputText.trim() !== 'Ask WizeBot about finance...') {
       alert(`Sending: ${inputText}`);
-      setInputText('Ask WealthBot about finance...');
+      setInputText('Ask WizeBot about finance...');
       setIsEditing(false);
     }
   };
@@ -48,59 +49,71 @@ export default function Home() {
   }, [inputText]); // Re-run when inputText changes
 
   return (
-    <div className="app-container">
-      {/* Title with Logo */}
-      <div className="title-container">
-        <img src="/logo.png" alt="Wize Wealth Logo" className="logo-image" /> {/* Replace with your image path */}
-        <h1 className="title">WealthNova</h1>
-      </div>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> {/* Ensure mobile viewport */}
+      </Head>
+      <div className="app-container">
+        {/* Title with Logo */}
+        <div className="title-container">
+          <img src="/logo.png" alt="Wize Wealth Logo" className="logo-image" /> {/* Replace with your image path */}
+          <h1 className="title">Wize Wealth</h1>
+        </div>
 
-      {/* Questions Section */}
-      <div className="questions-section">
-        <h2 className="section-title">Questions You Can Ask :</h2>
+        <hr className="divider" /> {/* First dividing line between company name and questions */}
 
-        {/* Question Cards */}
-        <div className="cards-container">
-          {questions.map((q) => (
-            <div
-              key={q.id}
-              className={`card ${q.id}-card`}
-              onClick={() => handleTabClick(q.content, q.text)}
-            >
-              <q.icon className="card-icon" />
-              <span>{q.text}</span>
+        {/* Questions Section */}
+        <div className="questions-section">
+          <h2 className="section-title">Questions You Can Ask :</h2>
+
+          {/* Question Cards */}
+          <div className="cards-container">
+            {questions.map((q) => (
+              <div
+                key={q.id}
+                className={`card ${q.id}-card`}
+                onClick={() => handleTabClick(q.content, q.text)}
+              >
+                <q.icon className="card-icon" />
+                <span>{q.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <hr className="divider" /> {/* Second dividing line between questions and bottom section */}
+
+        {/* Popup */}
+        {showPopup && (
+          <div className="popup">
+            <div className="popup-content">{popupMessage}</div>
+          </div>
+        )}
+
+        {/* Bottom Section (Chatbot and Disclaimer) */}
+        <div className="bottom-section">
+          {/* Input Bar and Send Button Container */}
+          <div className="input-bar-container">
+            <div className="input-bar">
+              <textarea
+                value={inputText}
+                onChange={handleInputChange}
+                className="input-field"
+                onFocus={() => !isEditing && setInputText('')}
+                onBlur={() => !isEditing && inputText.trim() === '' && setInputText('Ask WizeBot about finance...')}
+              />
             </div>
-          ))}
+            <div className="send-button" onClick={handleSendClick}>
+              <Send className="send-icon" />
+            </div>
+          </div>
+
+          {/* Disclaimer */}
+          <p className="disclaimer">
+            For more professional advice, consult a certified financial advisor.
+          </p>
         </div>
       </div>
-
-      {/* Popup */}
-      {showPopup && (
-        <div className="popup">
-          <div className="popup-content">{popupMessage}</div>
-        </div>
-      )}
-
-      {/* Input Bar and Send Button Container */}
-      <div className="input-bar-container">
-        <div className="input-bar">
-          <textarea
-            value={inputText}
-            onChange={handleInputChange}
-            className="input-field"
-            onFocus={() => !isEditing && setInputText('')}
-            onBlur={() => !isEditing && inputText.trim() === '' && setInputText('Ask WizeBot about finance...')}
-          />
-        </div>
-        <div className="send-button" onClick={handleSendClick}>
-          <Send className="send-icon" />
-        </div>
-      </div>
-
-      {/* Disclaimer */}
-      <p className="disclaimer">
-        For more professional advice, consult a certified financial advisor.
-      </p>
-    </div>
+    </>
   );
 }

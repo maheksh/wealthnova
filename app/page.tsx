@@ -57,7 +57,7 @@ export default function Home() {
         {/* Title with Logo */}
         <div className="title-container">
           <img src="/logo.png" alt="Wize Wealth Logo" className="logo-image" /> {/* Replace with your image path */}
-          <h1 className="title">Wize Wealth</h1>
+          <h1 className="title">WealthNova</h1>
         </div>
 
         <hr className="divider" /> {/* First dividing line between company name and questions */}

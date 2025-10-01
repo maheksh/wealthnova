@@ -16,7 +16,7 @@ body {
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* Reduced gap to minimize blank space */
+  gap: 0.5rem; /* Default gap for laptop */
   position: relative;
   overflow-y: auto; /* Enable page scrolling */
   min-height: 100vh; /* Fill viewport height initially */
@@ -46,14 +46,14 @@ body {
 }
 
 .questions-section {
-  margin-bottom: 0.5rem; /* Reduced to minimize blank space */
+  margin-bottom: 0.5rem; /* Default margin for laptop */
 }
 
 .section-title {
   font-size: clamp(1rem, 3vw, 1.5rem); /* Responsive font size */
   font-weight: 600;
   color: #FFD700;
-  margin-bottom: 0.5rem; /* Reduced to minimize blank space */
+  margin-bottom: 0.5rem; /* Default margin for laptop */
 }
 
 .cards-container {
@@ -67,7 +67,7 @@ body {
   background-color: #0D1117;
   border: 1px solid #4B5563;
   border-radius: 2rem;
-  padding: 1rem; /* Reduced for better mobile fit */
+  padding: 1rem; /* Default padding for laptop */
   display: inline-flex; /* Changed to inline-flex to size based on content */
   align-items: start;
   gap: 0.75rem;
@@ -116,43 +116,48 @@ body {
   }
 
   .app-container {
-    padding: 0.25rem; /* Further reduce padding on mobile */
-    padding-bottom: 0.5rem; /* Reduce bottom padding significantly */
+    padding: 0.1rem; /* Further reduce padding on mobile */
+    padding-bottom: 0.1rem; /* Reduce bottom padding */
+    gap: 0; /* Remove gap on mobile */
   }
 
   .questions-section {
-    margin-bottom: 0.25rem; /* Reduce space between questions and chatbot */
-  }
-
-  .title {
-    font-size: clamp(1.2rem, 5vw, 2rem); /* Smaller max on mobile */
+    margin-bottom: 0; /* Remove space between questions and chatbot */
   }
 
   .section-title {
-    font-size: clamp(0.9rem, 3vw, 1.2rem); /* Smaller max on mobile */
+    margin-bottom: 0; /* Remove space */
   }
 
   .cards-container {
-    gap: 0.25rem; /* Reduce gap on mobile */
+    gap: 0.5rem; /* Increase distance between cards on mobile (was 0.1rem) */
   }
 
   .card {
-    padding: 0.5rem; /* Reduce padding on mobile */
+    padding: 0.5rem; /* Maintain original padding on mobile to preserve size */
   }
 
   .input-bar {
-    gap: 0.25rem; /* Further reduce gap */
+    gap: 0.1rem; /* Further reduce gap */
   }
 
   .send-button {
     width: 3rem; /* Maintain minimum touch target */
     height: 3rem;
-    margin-left: 0.25rem; /* Reduce margin for mobile */
+    margin-left: 0.1rem; /* Further reduce margin for mobile */
   }
 
   .disclaimer {
     font-size: clamp(0.5rem, 2vw, 0.7rem); /* Smaller min on mobile */
-    margin-top: 0.25rem; /* Reduce gap above disclaimer */
+    margin-top: 0; /* Remove gap above disclaimer */
+  }
+
+  .divider {
+    margin: 0; /* Remove space around the line on mobile */
+  }
+
+  .bottom-section {
+    margin-top: 0; /* Remove gap to push content up */
   }
 }
 
@@ -162,7 +167,7 @@ body {
   padding: 0.001rem;
   display: flex;
   align-items: flex-start; /* Changed to flex-start to accommodate growing height */
-  gap: 1rem; /* Reduced gap for mobile */
+  gap: 1rem; /* Default gap for laptop */
   border: 2px solid #FFD700; /* Prominent yellow border */
   opacity: 1;
   flex: 1; /* Allow input-bar to take available space */
@@ -215,7 +220,7 @@ body {
   font-size: clamp(0.6rem, 2vw, 0.75rem); /* Responsive font size */
   color: #9CA3AF;
   text-align: center;
-  margin-top: 0.5rem; /* Small gap above disclaimer */
+  margin-top: 0.5rem; /* Default margin for laptop */
 }
 
 .popup {
@@ -245,7 +250,7 @@ body {
   border: 0;
   height: 1px;
   background: linear-gradient(to right, #0D1117, #FFD700, #0D1117); /* Camouflage effect with gradient */
-  margin: 0.5rem 0; /* Reduced space around the line */
+  margin: 0.5rem 0; /* Default margin for laptop */
   width: 100%; /* Full width */
   opacity: 0.5; /* Subtle visibility */
 }

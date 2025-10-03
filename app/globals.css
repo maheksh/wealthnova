@@ -36,10 +36,10 @@ body {
 }
 
 .navbar-content {
-  margin: 0 auto; /* Center the content horizontally */
+  margin: 0 auto;
   padding: 0 1rem;
   display: flex;
-  justify-content: center; /* Center the title */
+  justify-content: center;
   align-items: center;
 }
 
@@ -72,7 +72,7 @@ body {
   background-color: #121212;
   border: 1px solid #333;
   border-radius: 0.5rem;
-  padding: 0.6875rem; /* Reduced by ~4px from 0.75rem */
+  padding: 0.6875rem;
   display: inline-flex;
   align-items: start;
   gap: 0.5rem;
@@ -103,7 +103,7 @@ body {
 
 .input-bar-container {
   display: flex;
-  align-items: flex-start;
+  align-items: center; /* Changed to center for consistent vertical alignment */
   justify-content: space-between;
   width: 100%;
   margin: 0;
@@ -158,7 +158,7 @@ body {
   }
 
   .card {
-    padding: 0.4375rem; /* Reduced by ~4px from 0.5rem */
+    padding: 0.4375rem;
     gap: 0.25rem;
   }
 
@@ -173,13 +173,43 @@ body {
   }
 
   .input-bar {
+    padding: 0.25rem;
+    display: flex;
+    align-items: center; /* Changed to center for mobile */
     gap: 0.5rem;
+    border: 1px solid #333;
+    opacity: 1;
+    flex: 1;
+  }
+
+  .input-field {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #E5E7EB;
+    font-size: 0.9rem;
+    outline: none;
+    width: 100%;
+    min-height: 2rem; /* Increased to match send button height */
+    height: 2rem; /* Fixed height for alignment */
+    resize: none;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    padding: 0.25rem;
+    overflow-y: auto;
+    max-height: 2rem; /* Match send button height */
   }
 
   .send-button {
     width: 2.5rem;
-    height: 2.5rem;
+    height: 2rem; /* Reduced to match input-field height */
     margin-left: 0.5rem;
+  }
+
+  .send-icon {
+    width: 1.2rem;
+    height: 1.2rem;
   }
 
   .disclaimer {
@@ -193,7 +223,7 @@ body {
   border-radius: 0.5rem;
   padding: 0.25rem;
   display: flex;
-  align-items: flex-start;
+  align-items: center; /* Changed to center for consistent alignment */
   gap: 0.5rem;
   border: 1px solid #333;
   opacity: 1;

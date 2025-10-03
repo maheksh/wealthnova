@@ -8,7 +8,7 @@ export default function Home() {
     { id: 'car', emoji: '🚗', text: 'When should I buy a car?', content: 'When should I buy a car?' },
     { id: 'investment', emoji: '💰', text: 'Where to invest 1 lakh rupees?', content: 'Where to invest 1 lakh rupees?' },
     { id: 'gold', emoji: '⏰', text: 'Is it a good time to buy gold?', content: 'Is it a good time to buy gold?' },
-    { id: 'emergency', emoji: '⚠️', text: 'How to create an emergency fund?', content: ' How to create an emergency fund?' },
+    { id: 'emergency', emoji: '⚠️', text: 'How to create an emergency fund?', content: 'How to create an emergency fund?' },
     { id: 'stocks', emoji: '📈', text: 'How to start investing in stocks?', content: 'How to start investing in stocks?' },
   ];
 
@@ -23,19 +23,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" /> {/* Ensure mobile viewport */}
       </Head>
       <div className="app-container">
-        {/* Title with Logo */}
-        <div className="title-container">
-          <img src="/imgww.jpg" alt="Wize Wealth Logo" className="logo-image" /> {/* Replace with your image path */}
-          <h1 className="title">WealthNova</h1>
-        </div>
-
-        {/* Divider Line */}
-        <hr className="divider" />
-
         {/* Questions Section */}
         <div className="questions-section">
           <h2 className="section-title">Questions You Can Ask :</h2>
-
           {/* Question Cards */}
           <div className="cards-container">
             {questions.map((q) => (

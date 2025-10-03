@@ -1,25 +1,29 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import FloatingChatbot from './components/FloatingChatbot';
-
-const inter = Inter({ subsets: ['latin'] });
+import Navbar from './components/Navbar';
 
 export const metadata: Metadata = {
   title: 'Wize Wealth',
-  description: 'AI-powered financial advisor chatbot',
+  description: 'A financial advice chatbot',
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {children}
-        <FloatingChatbot />
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      </head>
+      <body>
+        <div className="app-container">
+          <Navbar />
+          {children}
+          <FloatingChatbot />
+        </div>
       </body>
     </html>
   );

@@ -11,66 +11,76 @@ body {
 }
 
 .app-container {
-  background-color: #000000;
-  color: #FFFFFF;
+  background-color: #121212; /* Dark gray background */
+  color: #cccccc;
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* Default gap for laptop */
+  gap: 0.5rem; /* Fixed gap */
   position: relative;
   overflow-y: auto; /* Enable page scrolling */
   min-height: 100vh; /* Fill viewport height initially */
   height: auto; /* Grow with content */
-  width: 100%; /* Cover full page width */
-  margin: 0; /* Remove any default margins */
+  width: 100%; /* Extend to full screen */
+  margin: 0; /* Remove any margins */
+  overflow-x: hidden; /* Prevent unwanted horizontal scroll */
 }
 
 .title-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem; /* Space between logo and text */
+  gap: 0.5rem; /* Fixed space */
 }
 
 .logo-image {
-  width: 5rem; /* Increased from 1.5rem */
-  height: 5rem; /* Increased from 1.5rem */
+  width: 6rem; /* Fixed size */
+  height: 6rem; /* Fixed size */
   object-fit: contain; /* Ensures the image scales properly */
 }
 
 .title {
-  color: #FFD700;
-  font-size: clamp(1.5rem, 5vw, 2.5rem); /* Responsive font size */
+  color: #ffd900d1; /* Gold color for title */
+  font-size: 2.5rem; /* Fixed font size */
   font-weight: bold;
   margin: 0; /* Remove default margin */
 }
 
+.divider {
+  border: 0; /* Remove default border */
+  height: 1px; /* Thin line */
+  background-color: #333; /* Match card border color for consistency */
+  margin-top: 5px; /* Fixed margin */
+  margin-bottom: 5px; /* Fixed margin */
+  width: 100%; /* Full width of container */
+}
+
 .questions-section {
-  margin-bottom: 0.5rem; /* Default margin for laptop */
+  margin-bottom: 0.5rem; /* Fixed margin */
 }
 
 .section-title {
-  font-size: clamp(1rem, 3vw, 1.5rem); /* Responsive font size */
+  font-size: 1.5rem; /* Fixed font size */
   font-weight: 600;
-  color: #FFD700;
-  margin-bottom: 0.5rem; /* Default margin for laptop */
+  color: #ffd900d1; /* Gold color for section title */
+  margin-bottom: 0.5rem; /* Fixed margin */
 }
 
 .cards-container {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  align-items: flex-start; /* Align cards to the start, allowing dynamic width */
+  gap: 0.75rem; /* Fixed gap */
+  align-items: flex-start; /* Align cards to the start */
 }
 
 .card {
-  background-color: #0D1117;
+  background-color: #121212; /* Default card background */
   border: 1px solid #4B5563;
-  border-radius: 2rem;
-  padding: 1rem; /* Default padding for laptop */
+  border-radius: 0.5rem;
+  padding: 1rem; /* Fixed padding */
   display: inline-flex; /* Changed to inline-flex to size based on content */
   align-items: start;
-  gap: 0.75rem;
+  gap: 0.75rem; /* Fixed gap */
   cursor: pointer;
   transition: background-color 0.2s;
   max-width: fit-content; /* Limit width to content size */
@@ -83,94 +93,119 @@ body {
   background-color: #1A202C;
 }
 
-.card-icon {
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-top: 0.125rem;
+.card-emoji {
+  font-size: 1.25rem; /* Fixed size */
+  line-height: 1.25rem;
+  margin-top: 0.125rem; /* Fixed margin */
 }
 
-.car-card .card-icon { color: #FFD700; }
-.investment-card .card-icon { color: #FFD700; }
-.gold-card .card-icon { color: #FFD700; }
-.emergency-card .card-icon { color: #FFD700; }
-.stocks-card .card-icon { color: #FFD700; }
+/* Colorful emojis for each card */
+.car-card .card-emoji { color: #FF0000; } /* Red for 🚗 */
+.investment-card .card-emoji { color: #0000FF; } /* Blue for 💰 */
+.gold-card .card-emoji { color: #FFD700; } /* Gold for ⏰ */
+.emergency-card .card-emoji { color: #FFA500; } /* Orange for ⚠️ */
+.stocks-card .card-emoji { color: #00FF00; } /* Green for 📈 */
 
 .input-bar-container {
   display: flex;
   align-items: flex-start;
   justify-content: space-between; /* Space between input-bar and send-button */
-  width: 90%; /* Relative width for responsiveness */
-  max-width: 650px; /* Cap at 650px for larger screens */
+  width: 100%; /* Full width within container */
+  max-width: none; /* Remove max-width constraint */
   margin: 0 auto;
   position: sticky; /* Keep at bottom */
   bottom: 0; /* No gap below chatbot */
   z-index: 10; /* Ensure it stays above other content */
 }
 
-/* Adjust sticky behavior for mobile to handle viewport changes */
+/* Floating Chatbot Styles */
+.floating-chatbot {
+  position: fixed;
+  bottom: 1rem; /* Fixed at bottom */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for exact centering */
+  width: 100%; /* Extend to full screen */
+  max-width: 600px; /* Limit maximum width for usability */
+  background-color: transparent; /* No background */
+  border-radius: 5rem; /* Remove border radius */
+  box-shadow: none; /* Remove shadow */
+  z-index: 1000;
+  padding: 0; /* Remove padding */
+  display: flex;
+  flex-direction: column; /* Stack disclaimer below */
+  gap: 0.5rem; /* Fixed gap */
+}
+
+/* Adjust sticky behavior for mobile - minimal responsiveness */
 @media (max-width: 768px) {
   .input-bar-container {
-    position: relative; /* Avoid sticky issues with mobile address bar */
-    width: 95%; /* Full width on mobile */
-    max-width: none; /* Remove max-width constraint */
+    position: relative; /* Avoid sticky issues */
+    width: 100%; /* Full width on mobile */
+    max-width: none;
   }
 
   .app-container {
-    padding: 0.1rem; /* Further reduce padding on mobile */
-    padding-bottom: 0.1rem; /* Reduce bottom padding */
-    gap: 0; /* Remove gap on mobile */
+    padding: 1rem; /* Fixed padding */
+    padding-bottom: 1rem;
+    gap: 0.5rem; /* Fixed gap */
   }
 
   .questions-section {
-    margin-bottom: 0; /* Remove space between questions and chatbot */
+    margin-bottom: 0.5rem; /* Fixed margin */
   }
 
   .section-title {
-    margin-bottom: 0; /* Remove space */
+    margin-bottom: 0.5rem; /* Fixed margin */
   }
 
   .cards-container {
-    gap: 0.5rem; /* Increase distance between cards on mobile (was 0.1rem) */
+    gap: 0.75rem; /* Fixed gap */
   }
 
   .card {
-    padding: 0.5rem; /* Maintain original padding on mobile to preserve size */
+    padding: 1rem; /* Fixed padding */
   }
 
   .input-bar {
-    gap: 0.1rem; /* Further reduce gap */
+    gap: 1rem; /* Fixed gap */
   }
 
   .send-button {
-    width: 3rem; /* Maintain minimum touch target */
-    height: 3rem;
-    margin-left: 0.1rem; /* Further reduce margin for mobile */
+    width: 3.5rem; /* Fixed size */
+    height: 3.5rem;
+    margin-left: 1rem; /* Fixed margin */
   }
 
   .disclaimer {
-    font-size: clamp(0.5rem, 2vw, 0.7rem); /* Smaller min on mobile */
-    margin-top: 0; /* Remove gap above disclaimer */
-  }
-
-  .divider {
-    margin: 0; /* Remove space around the line on mobile */
+    font-size: 0.75rem; /* Fixed font size */
+    margin-top: 0.5rem; /* Fixed margin */
   }
 
   .bottom-section {
-    margin-top: 0; /* Remove gap to push content up */
+    margin-top: 0; /* Fixed margin */
+  }
+
+  .floating-chatbot {
+    width: 100%; /* Full width on mobile */
+    max-width: 600px; /* Limit maximum width */
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
 .input-bar {
-  background-color: #0D1117;
+  background-color: #1e1e1e;
   border-radius: 0.5rem;
   padding: 0.001rem;
   display: flex;
-  align-items: flex-start; /* Changed to flex-start to accommodate growing height */
-  gap: 1rem; /* Default gap for laptop */
-  border: 2px solid #FFD700; /* Prominent yellow border */
+  align-items: flex-start;
+  gap: 1rem;
+  border: 2px solid #666; /* Changed to #666 for visibility against #1e1e1e */
   opacity: 1;
-  flex: 1; /* Allow input-bar to take available space */
+  flex: 1;
+  /* Removed debug outline - re-enable if needed */
+  /* outline: 1px solid red; */
 }
 
 .input-field {
@@ -178,7 +213,7 @@ body {
   background: none;
   border: none;
   color: #E5E7EB; /* Brighter light gray for readability */
-  font-size: 1rem;
+  font-size: 1rem; /* Fixed font size */
   outline: none;
   width: 100%; /* Allow width to grow with content */
   min-height: 2rem; /* Minimum height for usability */
@@ -187,40 +222,45 @@ body {
   word-wrap: break-word; /* Ensure wrapping for older browsers */
   white-space: pre-wrap; /* Preserve newlines and spaces */
   height: auto; /* Allow height to adjust dynamically */
-  padding: 0.5rem; /* Add some internal padding for better appearance */
+  padding: 0.5rem; /* Fixed padding */
   overflow-y: auto; /* Add scrollbar for long text */
   max-height: 150px; /* Limit height to prevent overlap, with scrollbar */
 }
 
+/* Style for the pre-typed text when not focused or edited */
+.input-field:not(:focus):not(:active) {
+  color: #cccccc; /* Light gray for pre-typed questions */
+}
+
 .send-button {
-  width: 3.5rem; /* Increased for better touch target */
-  height: 3.5rem; /* Increased for better touch target */
-  background-color: #FFD700; /* Bright yellow */
-  border-radius: 50%;
+  width: 3.5rem; /* Fixed size */
+  height: 3.5rem; /* Fixed size */
+  background-color: #ffd900d1; /* Bright green */
+  border-radius: 0.5rem; /* Square shape */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background-color 0.2s;
-  margin-top: 0.25rem; /* Adjust alignment with growing textarea */
-  margin-left: 1rem; /* Add space from input-bar */
+  margin-top: 0.25rem; /* Fixed margin */
+  margin-left: 1rem; /* Fixed margin */
 }
 
 .send-button:hover {
-  background-color: #FFC107; /* Slightly darker yellow on hover */
+  background-color: #dddd64; /* Darker green on hover */
 }
 
 .send-icon {
-  width: 1rem;
-  height: 1rem;
-  color: #000000;
+  width: 1.5rem; /* Fixed size */
+  height: 1.5rem; /* Fixed size */
+  color: #0b0b0a; /* Reverted to purple (previous color) */
 }
 
 .disclaimer {
-  font-size: clamp(0.6rem, 2vw, 0.75rem); /* Responsive font size */
-  color: #9CA3AF;
+  font-size: 0.75rem; /* Fixed font size */
+  color: #7d8888; /* Cyan for disclaimer */
   text-align: center;
-  margin-top: 0.5rem; /* Default margin for laptop */
+  margin-top: 0.5rem; /* Fixed margin */
 }
 
 .popup {
@@ -237,20 +277,6 @@ body {
 }
 
 .popup-content {
-  font-size: 1rem;
+  font-size: 1rem; /* Fixed font size */
   text-align: center;
-}
-
-.bottom-section {
-  flex: 0; /* Prevent bottom section from stretching */
-  margin-top: auto; /* Push to bottom */
-}
-
-.divider {
-  border: 0;
-  height: 1px;
-  background: linear-gradient(to right, #0D1117, #FFD700, #0D1117); /* Camouflage effect with gradient */
-  margin: 0.5rem 0; /* Default margin for laptop */
-  width: 100%; /* Full width */
-  opacity: 0.5; /* Subtle visibility */
 }

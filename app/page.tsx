@@ -1,52 +1,21 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Car, DollarSign, Clock, AlertTriangle, TrendingUp, Send } from 'lucide-react';
+import { useState } from 'react';
 import Head from 'next/head'; // Ensure viewport meta tag
 
 export default function Home() {
-  const [inputText, setInputText] = useState<string>('Ask WizeBot about finance...');
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [showPopup, setShowPopup] = useState<boolean>(false);
-  const [popupMessage, setPopupMessage] = useState<string>('');
-
   const questions = [
-    { id: 'car', icon: Car, text: 'When should I buy a car?', content: 'When should I buy a car?' },
-    { id: 'investment', icon: DollarSign, text: 'Where to invest 1 lakh rupees?', content: 'Where to invest 1 lakh rupees?' },
-    { id: 'gold', icon: Clock, text: 'Is it a good time to buy gold?', content: 'Is it a good time to buy gold?' },
-    { id: 'emergency', icon: AlertTriangle, text: 'How to create an emergency fund?', content: ' How to create an emergency fund?' },
-    { id: 'stocks', icon: TrendingUp, text: 'How to start investing in stocks?', content: 'How to start investing in stocks?' },
+    { id: 'car', emoji: '🚗', text: 'When should I buy a car?', content: 'When should I buy a car?' },
+    { id: 'investment', emoji: '💰', text: 'Where to invest 1 lakh rupees?', content: 'Where to invest 1 lakh rupees?' },
+    { id: 'gold', emoji: '⏰', text: 'Is it a good time to buy gold?', content: 'Is it a good time to buy gold?' },
+    { id: 'emergency', emoji: '⚠️', text: 'How to create an emergency fund?', content: ' How to create an emergency fund?' },
+    { id: 'stocks', emoji: '📈', text: 'How to start investing in stocks?', content: 'How to start investing in stocks?' },
   ];
 
   const handleTabClick = (content: string, text: string) => {
-    setInputText(content);
-    setIsEditing(true);
-    setPopupMessage(`Selected: ${text}`);
-    setShowPopup(true);
-    setTimeout(() => setShowPopup(false), 1500);
+    // Optional: Interact with chatbot if needed (e.g., prefill input)
+    console.log(`Selected: ${text}, Content: ${content}`);
   };
-
-  const handleSendClick = () => {
-    if (isEditing && inputText.trim() !== 'Ask WizeBot about finance...') {
-      alert(`Sending: ${inputText}`);
-      setInputText('Ask WizeBot about finance...');
-      setIsEditing(false);
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setInputText(e.target.value);
-    setIsEditing(true);
-  };
-
-  // Effect to automatically adjust textarea height based on content
-  useEffect(() => {
-    const textarea = document.querySelector('.input-field') as HTMLTextAreaElement;
-    if (textarea) {
-      textarea.style.height = 'auto'; // Reset height
-      textarea.style.height = `${Math.min(Math.max(textarea.scrollHeight, 32), 150)}px`; // Limit to max-height of 150px
-    }
-  }, [inputText]); // Re-run when inputText changes
 
   return (
     <>
@@ -56,11 +25,12 @@ export default function Home() {
       <div className="app-container">
         {/* Title with Logo */}
         <div className="title-container">
-          <img src="/logo.png" alt="Wize Wealth Logo" className="logo-image" /> {/* Replace with your image path */}
+          <img src="/imgww.jpg" alt="Wize Wealth Logo" className="logo-image" /> {/* Replace with your image path */}
           <h1 className="title">WealthNova</h1>
         </div>
 
-        <hr className="divider" /> {/* First dividing line between company name and questions */}
+        {/* Divider Line */}
+        <hr className="divider" />
 
         {/* Questions Section */}
         <div className="questions-section">
@@ -74,44 +44,11 @@ export default function Home() {
                 className={`card ${q.id}-card`}
                 onClick={() => handleTabClick(q.content, q.text)}
               >
-                <q.icon className="card-icon" />
+                <span className="card-emoji" role="img" aria-label={q.text}>{q.emoji}</span>
                 <span>{q.text}</span>
               </div>
             ))}
           </div>
-        </div>
-
-        <hr className="divider" /> {/* Second dividing line between questions and bottom section */}
-
-        {/* Popup */}
-        {showPopup && (
-          <div className="popup">
-            <div className="popup-content">{popupMessage}</div>
-          </div>
-        )}
-
-        {/* Bottom Section (Chatbot and Disclaimer) */}
-        <div className="bottom-section">
-          {/* Input Bar and Send Button Container */}
-          <div className="input-bar-container">
-            <div className="input-bar">
-              <textarea
-                value={inputText}
-                onChange={handleInputChange}
-                className="input-field"
-                onFocus={() => !isEditing && setInputText('')}
-                onBlur={() => !isEditing && inputText.trim() === '' && setInputText('Ask WizeBot about finance...')}
-              />
-            </div>
-            <div className="send-button" onClick={handleSendClick}>
-              <Send className="send-icon" />
-            </div>
-          </div>
-
-          {/* Disclaimer */}
-          <p className="disclaimer">
-            For more professional advice, consult a certified financial advisor.
-          </p>
         </div>
       </div>
     </>

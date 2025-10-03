@@ -71,11 +71,11 @@ body {
 .card {
   background-color: #121212;
   border: 1px solid #333;
-  border-radius: 0.5rem;
-  padding: 0.6875rem;
+  border-radius: 0.375rem; /* Reduced from 0.5rem */
+  padding: 0.5625rem; /* Reduced by ~4px from 0.6875rem */
   display: inline-flex;
   align-items: start;
-  gap: 0.5rem;
+  gap: 0.375rem; /* Reduced from 0.5rem */
   cursor: pointer;
   transition: background-color 0.2s;
   max-width: 80%;
@@ -89,8 +89,8 @@ body {
 }
 
 .card-emoji {
-  font-size: 1.25rem;
-  line-height: 1.25rem;
+  font-size: 1.125rem; /* Reduced from 1.25rem */
+  line-height: 1.125rem; /* Reduced from 1.25rem */
   margin-top: 0.125rem;
 }
 
@@ -103,13 +103,14 @@ body {
 
 .input-bar-container {
   display: flex;
-  align-items: center; /* Changed to center for consistent vertical alignment */
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   margin: 0;
   position: sticky;
   bottom: 0;
   z-index: 10;
+  padding: 0.25rem 0;
 }
 
 /* Floating Chatbot Styles */
@@ -158,12 +159,19 @@ body {
   }
 
   .card {
-    padding: 0.4375rem;
+    padding: 0.3125rem; /* Reduced by ~4px from 0.4375rem */
     gap: 0.25rem;
+    border-radius: 0.375rem; /* Reduced from 0.5rem */
+  }
+
+  .card-emoji {
+    font-size: 1.125rem; /* Reduced from 1.25rem */
+    line-height: 1.125rem; /* Reduced from 1.25rem */
   }
 
   .input-bar-container {
     width: 100%;
+    padding: 0.25rem 0;
   }
 
   .floating-chatbot {
@@ -173,9 +181,9 @@ body {
   }
 
   .input-bar {
-    padding: 0.25rem;
+    padding: 0;
     display: flex;
-    align-items: center; /* Changed to center for mobile */
+    align-items: center;
     gap: 0.5rem;
     border: 1px solid #333;
     opacity: 1;
@@ -190,21 +198,22 @@ body {
     font-size: 0.9rem;
     outline: none;
     width: 100%;
-    min-height: 2rem; /* Increased to match send button height */
-    height: 2rem; /* Fixed height for alignment */
+    min-height: 2.5rem;
+    height: 2.5rem;
     resize: none;
     overflow-wrap: break-word;
     word-wrap: break-word;
     white-space: pre-wrap;
-    padding: 0.25rem;
+    padding: 0.5rem;
     overflow-y: auto;
-    max-height: 2rem; /* Match send button height */
+    max-height: 2.5rem;
   }
 
   .send-button {
     width: 2.5rem;
-    height: 2rem; /* Reduced to match input-field height */
+    height: 2.5rem;
     margin-left: 0.5rem;
+    padding: 0;
   }
 
   .send-icon {
@@ -213,7 +222,7 @@ body {
   }
 
   .disclaimer {
-    font-size: 0.7rem;
+    font-size: 1rem;
     margin-top: 0.25rem;
   }
 }
@@ -223,7 +232,7 @@ body {
   border-radius: 0.5rem;
   padding: 0.25rem;
   display: flex;
-  align-items: center; /* Changed to center for consistent alignment */
+  align-items: center;
   gap: 0.5rem;
   border: 1px solid #333;
   opacity: 1;
@@ -279,7 +288,7 @@ body {
 }
 
 .disclaimer {
-  font-size: 0.7rem;
+  font-size: 1rem;
   color: #7d8888;
   text-align: center;
   margin-top: 0.25rem;

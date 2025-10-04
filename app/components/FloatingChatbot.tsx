@@ -26,8 +26,8 @@ export default function FloatingChatbot() {
   useEffect(() => {
     const textarea = document.querySelector('.input-field') as HTMLTextAreaElement;
     if (textarea) {
-      textarea.style.height = 'auto'; // Reset height
-      textarea.style.height = `${Math.min(Math.max(textarea.scrollHeight, 32), 150)}px`; // Limit to max-height of 150px
+      textarea.style.height = '23px'; // Force single line height initially
+      textarea.style.height = `${Math.min(Math.max(textarea.scrollHeight, 23), 150)}px`; // Ensure it stays at 23px minimum
     }
   }, [inputText]);
 

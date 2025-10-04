@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Head from 'next/head'; // Ensure viewport meta tag
+import Head from 'next/head';
 
 export default function Home() {
   const questions = [
@@ -13,21 +13,18 @@ export default function Home() {
   ];
 
   const handleTabClick = (content: string, text: string) => {
-    // Optional: Interact with chatbot if needed (e.g., prefill input)
     console.log(`Selected: ${text}, Content: ${content}`);
   };
 
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> {/* Ensure mobile viewport */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <div className="app-container">
-        {/* Questions Section */}
+      <div className="app-container" style={{ overflow: 'hidden' }}>
         <div className="questions-section">
           <h2 className="section-title">Questions You Can Ask :</h2>
-          {/* Question Cards */}
-          <div className="cards-container">
+          <div className="cards-container" style={{ overflow: 'hidden' }}>
             {questions.map((q) => (
               <div
                 key={q.id}

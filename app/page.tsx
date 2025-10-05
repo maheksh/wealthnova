@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Head from 'next/head';
+import Navbar from './components/Navbar'; // Ensure Navbar is imported
 
 export default function Home() {
   const questions = [
@@ -21,10 +22,11 @@ export default function Home() {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <div className="app-container" style={{ overflow: 'hidden' }}>
+      <div className="app-container" style={{ overflow: 'hidden' }}> {/* Adjusted overflow to hidden for testing */}
+        <Navbar /> {/* Ensure Navbar is at the top */}
         <div className="questions-section">
           <h2 className="section-title">Questions You Can Ask :</h2>
-          <div className="cards-container" style={{ overflow: 'hidden' }}>
+          <div className="cards-container" style={{ overflow: 'hidden', maxHeight: 'calc(100vh - 6rem)' }}>
             {questions.map((q) => (
               <div
                 key={q.id}

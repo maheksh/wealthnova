@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Head from 'next/head';
-import Navbar from './components/Navbar'; // Correct import path
 
 export default function Home() {
   const questions = [
@@ -23,7 +22,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div className="app-container">
-        <Navbar /> {/* Navbar at the top */}
         <div className="questions-section">
           <h2 className="section-title">Questions You Can Ask :</h2>
           <div className="cards-container" style={{ overflow: 'auto', maxHeight: 'calc(100vh - 6rem)' }}>

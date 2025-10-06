@@ -14,26 +14,26 @@ body {
 .app-container {
   background-color: #121212;
   color: #cccccc;
-  padding: 1rem;
+  padding: 5rem 1rem 1rem 1rem; /* Added padding-top to account for fixed navbar */
   display: flex;
   flex-direction: column;
   gap: 1rem;
   position: relative;
-  overflow-y: auto; /* Allow page scrolling */
+  overflow-y: auto;
   min-height: 100vh;
   width: 100%;
   margin: 0;
-  padding-top: 0; /* Removed padding-top since navbar is no longer fixed */
 }
 
 .navbar {
   background-color: #121212;
   padding: 0.75rem;
   width: 100%;
+  position: fixed; /* Changed from sticky to fixed */
+  top: 0;
+  left: 0; /* Ensure it spans the full width */
   z-index: 1000;
   border-bottom: 1px solid #333;
-  height: 3.5rem; /* Explicit height */
-  overflow: hidden; /* Prevent internal scrolling */
 }
 
 .navbar-content {
@@ -42,12 +42,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%; /* Ensure content fits navbar height */
 }
 
 .navbar-title {
   color: #D5AD2A;
-  font-size: clamp(1.7rem, 2.2vw, 2.2rem); /* Increased by 0.5rem */
+  font-size: clamp(1.7rem, 2.2vw, 2.2rem);
   font-weight: 700;
   margin: 0;
 }
@@ -137,15 +136,16 @@ body {
 /* Adjust sticky behavior for mobile */
 @media (max-width: 768px) {
   .app-container {
-    padding: 0.5rem;
+    padding: 4rem 0.5rem 0.5rem 0.5rem; /* Adjusted padding-top for mobile */
     gap: 0.75rem;
-    padding-top: 0; /* Removed padding-top for mobile since navbar is static */
   }
 
   .navbar {
     padding: 0.5rem;
-    height: 4rem; /* Explicit height for mobile */
-    overflow: hidden; /* Prevent internal scrolling */
+    position: fixed; /* Ensure it remains fixed on mobile */
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 
   .navbar-content {
@@ -185,10 +185,8 @@ body {
 
   .floating-chatbot {
     width: 100%;
-    max-width: 600px;
+    max-width: 100%;
     bottom: 0.5rem;
-    margin-left: 4px; /* 0.1 cm margin on left */
-    margin-right: 4px; /* 0.1 cm margin on right */
   }
 
   .input-bar {
@@ -225,8 +223,6 @@ body {
     height: 2.5rem;
     margin-left: 0.5rem;
     padding: 0;
-    margin-left: 4px; /* 0.1 cm margin on left to match chatbot */
-    margin-right: 4px; /* 0.1 cm margin on right */
   }
 
   .send-icon {

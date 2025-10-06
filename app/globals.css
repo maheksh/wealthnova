@@ -14,7 +14,7 @@ body {
 .app-container {
   background-color: #121212;
   color: #cccccc;
-  padding: 5rem 1rem 1rem 1rem; /* Added padding-top to account for fixed navbar */
+  padding: 5rem 1rem 1rem 1rem; /* Top padding for fixed navbar */
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -29,9 +29,9 @@ body {
   background-color: #121212;
   padding: 0.75rem;
   width: 100%;
-  position: fixed; /* Changed from sticky to fixed */
+  position: fixed;
   top: 0;
-  left: 0; /* Ensure it spans the full width */
+  left: 0;
   z-index: 1000;
   border-bottom: 1px solid #333;
 }
@@ -67,6 +67,27 @@ body {
   flex-direction: column;
   gap: 0.5rem;
   align-items: flex-start;
+  overflow-y: auto; /* Ensure scrollbar for overflow */
+  max-height: calc(100vh - 6rem); /* Maintain max-height for scrollbar */
+  scrollbar-width: thin; /* Firefox: slim scrollbar */
+  scrollbar-color: #D5AD2A #1e1e1e; /* Firefox: scrollbar styling */
+}
+
+.cards-container::-webkit-scrollbar {
+  width: 8px; /* Chrome/Safari: scrollbar width */
+}
+
+.cards-container::-webkit-scrollbar-track {
+  background: #1e1e1e; /* Scrollbar track color */
+}
+
+.cards-container::-webkit-scrollbar-thumb {
+  background: #D5AD2A; /* Scrollbar thumb color */
+  border-radius: 4px;
+}
+
+.cards-container::-webkit-scrollbar-thumb:hover {
+  background: #D5AD2ACC; /* Scrollbar thumb hover color */
 }
 
 .card {
@@ -83,7 +104,7 @@ body {
   word-wrap: break-word;
   overflow-wrap: break-word;
   min-width: 0;
-  font-size: 0.85rem; 
+  font-size: 0.85rem;
 }
 
 .card:hover {
@@ -108,7 +129,7 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin: 0;
+  margin: 0 0 0 1rem; /* Left margin for input box */
   position: sticky;
   bottom: 0;
   z-index: 10;
@@ -133,6 +154,29 @@ body {
   gap: 0.5rem;
 }
 
+/* Popup styles for output box */
+.popup {
+  position: fixed;
+  bottom: 4rem; /* Position above input bar */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  z-index: 1100;
+}
+
+.popup-content {
+  background-color: #1e1e1e;
+  color: #E5E7EB;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #333;
+  margin-right: 1rem; /* Right margin for output box */
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 /* Adjust sticky behavior for mobile */
 @media (max-width: 768px) {
   .app-container {
@@ -142,7 +186,7 @@ body {
 
   .navbar {
     padding: 0.5rem;
-    position: fixed; /* Ensure it remains fixed on mobile */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -162,6 +206,27 @@ body {
 
   .cards-container {
     gap: 0.5rem;
+    overflow-y: auto; /* Ensure scrollbar for mobile */
+    max-height: calc(100vh - 5rem); /* Adjusted for mobile */
+    scrollbar-width: thin;
+    scrollbar-color: #D5AD2A #1e1e1e;
+  }
+
+  .cards-container::-webkit-scrollbar {
+    width: 6px; /* Slightly thinner for mobile */
+  }
+
+  .cards-container::-webkit-scrollbar-track {
+    background: #1e1e1e;
+  }
+
+  .cards-container::-webkit-scrollbar-thumb {
+    background: #D5AD2A;
+    border-radius: 4px;
+  }
+
+  .cards-container::-webkit-scrollbar-thumb:hover {
+    background: #D5AD2ACC;
   }
 
   .card {
@@ -170,7 +235,7 @@ body {
     border-radius: 0.375rem;
     max-width: 100%;
     width: 100%;
-    font-size: 0.75rem; 
+    font-size: 0.75rem;
   }
 
   .card-emoji {
@@ -181,6 +246,8 @@ body {
   .input-bar-container {
     width: 100%;
     padding: 0.25rem 0;
+    margin-left: 0.1cm; /* At least 0.1cm left margin for input box on mobile */
+    margin-right: 0;
   }
 
   .floating-chatbot {
@@ -222,6 +289,7 @@ body {
     width: 2.5rem;
     height: 2.5rem;
     margin-left: 0.5rem;
+    margin-right: 0.1cm; /* At least 0.1cm right margin for send button on mobile */
     padding: 0;
   }
 
@@ -236,6 +304,10 @@ body {
     text-align: center;
     margin-top: 0.25rem;
     white-space: nowrap;
+  }
+
+  .popup-content {
+    margin-right: 0.5rem; /* Right margin for output box on mobile */
   }
 }
 

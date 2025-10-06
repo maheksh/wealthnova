@@ -53,6 +53,7 @@ body {
 
 .questions-section {
   margin-bottom: 1rem;
+  padding-top: 0.5rem; /* Ensure content starts below fixed navbar */
 }
 
 .section-title {
@@ -67,8 +68,8 @@ body {
   flex-direction: column;
   gap: 0.5rem;
   align-items: flex-start;
-  overflow-y: auto; /* Ensure scrollbar for overflow */
-  max-height: calc(100vh - 6rem); /* Maintain max-height for scrollbar */
+  overflow-y: auto; /* Scrollbar for question box */
+  max-height: calc(100vh - 5rem - 1rem - 1.5rem - 1rem); /* Adjusted: 100vh - navbar height (~3rem) - app-container padding-top (1rem) - section-title (~1.5rem) - questions-section margin (1rem) */
   scrollbar-width: thin; /* Firefox: slim scrollbar */
   scrollbar-color: #D5AD2A #1e1e1e; /* Firefox: scrollbar styling */
 }
@@ -198,6 +199,7 @@ body {
 
   .questions-section {
     margin-bottom: 0.75rem;
+    padding-top: 0.5rem; /* Ensure content starts below fixed navbar */
   }
 
   .section-title {
@@ -206,8 +208,8 @@ body {
 
   .cards-container {
     gap: 0.5rem;
-    overflow-y: auto; /* Ensure scrollbar for mobile */
-    max-height: calc(100vh - 5rem); /* Adjusted for mobile */
+    overflow-y: auto; /* Scrollbar for mobile */
+    max-height: calc(100vh - 4rem - 0.5rem - 1.5rem - 0.75rem); /* Adjusted: 100vh - navbar height (~2.7rem) - app-container padding (0.5rem) - section-title (~1.5rem) - questions-section margin (0.75rem) */
     scrollbar-width: thin;
     scrollbar-color: #D5AD2A #1e1e1e;
   }
@@ -246,7 +248,7 @@ body {
   .input-bar-container {
     width: 100%;
     padding: 0.25rem 0;
-    margin-left: 0.1cm; /* At least 0.1cm left margin for input box on mobile */
+    margin-left: 0.1cm; /* 0.1cm left margin for input box on mobile */
     margin-right: 0;
   }
 
@@ -289,7 +291,7 @@ body {
     width: 2.5rem;
     height: 2.5rem;
     margin-left: 0.5rem;
-    margin-right: 0.1cm; /* At least 0.1cm right margin for send button on mobile */
+    margin-right: 0.1cm; /* 0.1cm right margin for send button on mobile */
     padding: 0;
   }
 

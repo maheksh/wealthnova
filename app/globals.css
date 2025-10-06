@@ -14,7 +14,7 @@ body {
 .app-container {
   background-color: #121212;
   color: #cccccc;
-  padding: 5rem 1rem 1rem 1rem; /* Increased padding-top for fixed navbar */
+  padding: 5rem 1rem 1rem 1rem; /* Added padding-top to account for fixed navbar */
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -32,7 +32,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10000; /* Increased z-index to ensure navbar stays on top */
+  z-index: 10000; /* High z-index to stay above all content */
   border-bottom: 1px solid #333;
 }
 
@@ -147,7 +147,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 10000; /* Ensure navbar stays on top on mobile */
+    z-index: 10000; /* Ensure navbar stays on top */
   }
 
   .navbar-content {

@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -181,7 +182,6 @@ body {
   .input-bar-container {
     width: 100%;
     padding: 0.25rem 0;
-    margin-left: 0.5rem; /* Increased left margin to keep input box within screen */
   }
 
   .floating-chatbot {
@@ -223,7 +223,6 @@ body {
     width: 2.5rem;
     height: 2.5rem;
     margin-left: 0.5rem;
-    margin-right: 0.5rem; /* Increased right margin to keep send button within screen */
     padding: 0;
   }
 

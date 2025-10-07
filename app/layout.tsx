@@ -1,29 +1,26 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import FloatingChatbot from './components/FloatingChatbot';
+// app/layout.tsx
 import Navbar from './components/Navbar';
+import type { Viewport } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Wize Wealth',
-  description: 'A financial advice chatbot',
+import './globals.css';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  userScalable: false,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <head>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      </head>
-      <body style={{ overflow: 'hidden' }}>
-        <div className="app-container">
-          <Navbar />
-          {children}
-          <FloatingChatbot />
-        </div>
+      <body>
+        <Navbar />
+        {children}
       </body>
     </html>
   );

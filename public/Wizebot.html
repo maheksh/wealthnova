@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask WizeBot – AI Finance Chatbot</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#D5AD2A',secondary:'#2A2A2A'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<link rel="icon" type="image/x-icon" href="/favicon.png" />
+
+<!-- OPTIONAL charts support for future graph replies -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body { background-color: #121212; color: white; font-family: 'Poppins', sans-serif; }
+.chat-container::-webkit-scrollbar { width: 6px; }
+.chat-container::-webkit-scrollbar-track { background: #1e1e1e; border-radius: 10px; }
+.chat-container::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+.chat-container::-webkit-scrollbar-thumb:hover { background: #444; }
+.suggestions-container { scrollbar-width: none; }
+.suggestions-container::-webkit-scrollbar { display: none; }
+.chat-user-message { background-color: #d5ad2a26; border: 1px solid #d5ad2a4d; }
+.chat-bot-message { background-color: #1e1e1e; border: 1px solid #2a2a2a; }
+
+/* typing dots (unchanged) */
+@keyframes blink { 0%{opacity:.2;} 20%{opacity:1;} 100%{opacity:.2;} }
+.dot { animation-name: blink; animation-duration: 1.4s; animation-iteration-count: infinite; animation-fill-mode: both; }
+.dot.one{animation-delay:0s;} .dot.two{animation-delay:.2s;} .dot.three{animation-delay:.4s;}
+
+/* NEW: chips + table styling */
+.ww-chip{display:inline-block;margin:.25rem .25rem 0 0;padding:.35rem .6rem;border:1px solid #333;border-radius:9999px;color:#ccc;font-size:.8rem;cursor:pointer}
+.ww-chip:hover{background:#d5ad2a26;border-color:#d5ad2a4d;color:#fff}
+.ww-table{width:100%;border-collapse:collapse}
+.ww-table th,.ww-table td{border:1px solid #333;padding:.5rem;text-align:left}
+.ww-table th{background:#1e1e1e}
+</style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-91J623P1M6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-91J623P1M6');
+</script>
+</head>
+
+<body class="flex flex-col h-screen">
+<!-- Desktop Top Navbar (md only) -->
+<nav class="hidden md:flex fixed top-0 left-0 w-full bg-[#121212] z-50 border-b border-gray-800 h-16 items-center px-8" style="justify-content: center;">
+  <div class="font-['Poppins'] flex flex-1 justify-end items-center space-x-24 max-w-xs">
+    <a href="index.html" class="text-gray-300 hover:text-primary transition text-lg">Home</a>
+    <a href="News.html" class="text-gray-300 hover:text-primary transition text-lg">News</a>
+  </div>
+  <div class="flex-none flex justify-center mx-44">
+    <span class="font-['Poppins'] text-primary text-2xl font-bold pointer-events-auto">Wize Wealth</span>
+  </div>
+  <div class="font-['Poppins'] flex flex-1 justify-start items-center space-x-24 max-w-xs ml-0">
+    <a href="Invest.html" class="text-gray-300 hover:text-primary transition text-lg">Invest</a>
+    <a href="Wizebot.html" class="text-primary hover:text-primary transition text-lg">WizeBot</a>
+  </div>
+</nav>
+
+<!-- Header (mobile only) -->
+<header class="fixed w-full top-0 bg-[#121212] z-10 p-4 border-b border-gray-800 md:hidden">
+  <h1 class="font-['Poppins'] text-primary text-2xl font-bold text-center">Wize Wealth</h1>
+</header>
+
+<main class="flex-1 overflow-hidden pt-14 pb-28 md:pb-8">
+  <div class="chat-container h-full overflow-y-auto px-4 py-4 md:pb-16" id="chatContainer">
+    <div class="suggestions-section mb-6" id="suggestionsSection">
+      <h2 class="text-primary font-medium text-lg mb-4 mt-8">Questions You Can Ask :</h2>
+      <div class="suggestions-container flex flex-col gap-3">
+        <div class="suggestion-item cursor-pointer border border-[#333] rounded-button px-4 py-3 text-sm text-[#CCCCCC] hover:bg-primary/10 transition-colors" onclick="askQuestion('When should I buy a car?')">🚘 When should I buy a car?</div>
+        <div class="suggestion-item cursor-pointer border border-[#333] rounded-button px-4 py-3 text-sm text-[#CCCCCC] hover:bg-primary/10 transition-colors" onclick="askQuestion('Where to invest 1 lakh rupees?')">💰 Where to invest 1 lakh rupees?</div>
+        <div class="suggestion-item cursor-pointer border border-[#333] rounded-button px-4 py-3 text-sm text-[#CCCCCC] hover:bg-primary/10 transition-colors" onclick="askQuestion('Is it a good time to buy gold?')">🌕 Is it a good time to buy gold?</div>
+        <div class="suggestion-item cursor-pointer border border-[#333] rounded-button px-4 py-3 text-sm text-[#CCCCCC] hover:bg-primary/10 transition-colors" onclick="askQuestion('How to create an emergency fund?')">‼️ How to create an emergency fund?</div>
+        <div class="suggestion-item cursor-pointer border border-[#333] rounded-button px-4 py-3 text-sm text-[#CCCCCC] hover:bg-primary/10 transition-colors" onclick="askQuestion('How to start investing in stocks?')">📈 How to start investing in stocks?</div>
+      </div>
+    </div>
+    <div id="chatMessages" class="space-y-4 mb-12"></div>
+  </div>
+</main>
+
+<!-- Mobile Question Input + Advice (md:hidden) -->
+<div class="fixed bottom-16 w-full bg-[#121212] border-t border-[#2a2a2a] px-4 py-3 md:hidden">
+  <div class="flex items-center gap-2">
+    <input type="text" id="chatInput" placeholder="Ask WizeBot about finance...." class="w-full bg-[#1e1e1e] text-white border border-[#333] rounded-button px-4 py-3 focus:outline-none focus:border-primary">
+    <button id="sendButton" class="w-12 h-12 bg-primary rounded-full flex items-center justify-center cursor-pointer !rounded-button">
+      <i class="ri-send-plane-fill text-[#121212] ri-lg"></i>
+    </button>
+  </div>
+  <p class="text-[#777] text-[10px] mt-2">For more professional advice, consult a certified financial advisor.</p>
+</div>
+
+<!-- Desktop Question Input + Advice (hidden md:block) -->
+<div class="hidden md:block fixed bottom-0 left-0 w-full bg-[#121212] border-t border-[#2a2a2a] px-8 py-4 z-40">
+  <div class="flex items-center gap-2 max-w-3xl mx-auto">
+    <input type="text" id="chatInputDesktop" placeholder="Ask WizeBot about finance...." class="w-full bg-[#1e1e1e] text-white border border-[#333] rounded-button px-4 py-3 focus:outline-none focus:border-primary">
+    <button id="sendButtonDesktop" class="w-12 h-12 bg-primary rounded-full flex items-center justify-center cursor-pointer !rounded-button">
+      <i class="ri-send-plane-fill text-[#121212] ri-lg"></i>
+    </button>
+  </div>
+  <p class="text-[#777] text-base mt-3 text-center">For more professional advice, consult a certified financial advisor.</p>
+</div>
+
+<!-- Bottom Navigation (mobile only) -->
+<nav class="fixed bottom-0 w-full bg-[#1A1A1A] border-t border-gray-800 z-50 md:hidden">
+  <div class="flex justify-around items-center h-16">
+    <a href="index.html" class="flex flex-col items-center justify-center w-1/4 h-full">
+      <div class="w-6 h-6 flex items-center justify-center"><i class="ri-home-5-line text-gray-400 ri-lg"></i></div>
+      <span class="text-xs text-gray-400 mt-1">Home</span>
+    </a>
+    <a href="News.html" class="flex flex-col items-center justify-center w-1/4 h-full">
+      <div class="w-6 h-6 flex items-center justify-center"><i class="ri-newspaper-line text-gray-400 ri-lg"></i></div>
+      <span class="text-xs text-gray-400 mt-1">News</span>
+    </a>
+    <a href="Invest.html" class="flex flex-col items-center justify-center w-1/4 h-full">
+      <div class="w-6 h-6 flex items-center justify-center"><i class="ri-line-chart-line text-gray-400 ri-lg"></i></div>
+      <span class="text-xs text-gray-400 mt-1">Invest</span>
+    </a>
+    <a href="#" class="flex flex-col items-center justify-center w-1/4 h-full">
+      <div class="w-6 h-6 flex items-center justify-center"><i class="ri-message-3-line text-primary ri-lg"></i></div>
+      <span class="text-xs text-primary mt-1">WizeBot</span>
+    </a>
+  </div>
+</nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const chatInput = document.getElementById('chatInput');
+  const sendButton = document.getElementById('sendButton');
+  const chatMessages = document.getElementById('chatMessages');
+  const suggestionsSection = document.getElementById('suggestionsSection');
+  const chatContainer = document.getElementById('chatContainer');
+
+  // Desktop elements
+  const chatInputDesktop = document.getElementById('chatInputDesktop');
+  const sendButtonDesktop = document.getElementById('sendButtonDesktop');
+
+  let conversationStarted = false;
+
+  // Existing: user/bot plain message renderer (kept for compatibility)
+  function addMessage(message, isUser) {
+    if (!conversationStarted) {
+      conversationStarted = true;
+      suggestionsSection.style.display = 'none';
+    }
+    const messageDiv = document.createElement('div');
+    messageDiv.className = isUser
+      ? 'chat-user-message rounded-button px-4 py-3 ml-auto max-w-[85%]'
+      : 'chat-bot-message rounded-button px-4 py-3 mr-auto max-w-[85%]';
+    messageDiv.textContent = message;
+    chatMessages.appendChild(messageDiv);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }
+
+  // NEW: richer bot renderer that supports tables, charts, and follow-up chips
+  function addBotResponse(payload){
+    if (!conversationStarted) {
+      conversationStarted = true;
+      suggestionsSection.style.display = 'none';
+    }
+    const wrap = document.createElement('div');
+    wrap.className = 'chat-bot-message rounded-button px-4 py-3 mr-auto max-w-[85%]';
+
+    // main answer (allow simple HTML from backend)
+    const p = document.createElement('div');
+    p.innerHTML = payload.reply || '';
+    wrap.appendChild(p);
+
+    // optional table
+    if (payload.tableHtml){
+      const t = document.createElement('div');
+      t.innerHTML = payload.tableHtml;
+      wrap.appendChild(t);
+    }
+
+    // optional chart (if provided by backend)
+    if (payload.chart){
+      const c = document.createElement('canvas'); c.width=320; c.height=200;
+      wrap.appendChild(c);
+      const ctx = c.getContext('2d');
+      new Chart(ctx,{
+        type: payload.chart.type || 'line',
+        data: {
+          labels: payload.chart.labels || [],
+          datasets: (payload.chart.series || []).map(s=>({ label: s.name, data: s.data }))
+        },
+        options: { responsive:true, maintainAspectRatio:true }
+      });
+    }
+
+    // follow-up chips
+    if (Array.isArray(payload.suggestions) && payload.suggestions.length){
+      const chips = document.createElement('div'); chips.style.marginTop='8px';
+      payload.suggestions.forEach(txt=>{
+        const chip = document.createElement('span');
+        chip.className = 'ww-chip';
+        chip.textContent = txt;
+        chip.onclick = () => { addMessage(txt, true); sendToBackend(txt); };
+        chips.appendChild(chip);
+      });
+      wrap.appendChild(chips);
+    }
+
+    chatMessages.appendChild(wrap);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }
+
+  // Typing indicator (kept)
+  let typingInterval;
+  function showTypingIndicator() {
+    const typingDiv = document.createElement('div');
+    typingDiv.id = 'typing-indicator';
+    typingDiv.className = 'chat-bot-message rounded-button px-4 py-3 mr-auto max-w-[85%] text-gray-400 italic';
+    typingDiv.textContent = 'WizeBot is typing...';
+    chatMessages.appendChild(typingDiv);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    const messages = ['WizeBot is typing...', 'Hold on a sec...', 'Almost there...'];
+    let step = 0;
+    typingInterval = setInterval(() => {
+      step++;
+      typingDiv.textContent = messages[step % messages.length];
+    }, 3000);
+  }
+  function removeTypingIndicator() {
+    clearInterval(typingInterval);
+    const typingDiv = document.getElementById('typing-indicator');
+    if (typingDiv) chatMessages.removeChild(typingDiv);
+  }
+
+  // BACKEND endpoint (unchanged)
+  const NODE_API = 'https://wizewealth-chatbot.onrender.com/chat';
+
+  // Stable visitor id for memory
+  let WZ_UID = localStorage.getItem('wz_uid');
+  if (!WZ_UID) {
+    WZ_UID = (crypto && crypto.randomUUID) ? crypto.randomUUID() : Math.random().toString(36).slice(2);
+    localStorage.setItem('wz_uid', WZ_UID);
+  }
+
+  // NEW: unified sender that understands both old string replies and new structured payloads
+  async function sendToBackend(question){
+    try {
+      const res = await fetch(NODE_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: question, user_id: WZ_UID })
+      });
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => '');
+        console.error('Chat API error', res.status, text);
+        addMessage("Oops! Server couldn't process that. Please try again.", false);
+        return;
+      }
+
+      const data = await res.json().catch(() => ({}));
+
+      // Backward compatibility: if backend returns simple text
+      if (typeof data === 'string') {
+        addMessage(data, false);
+        return;
+      }
+      if (data && typeof data.reply === 'string' && !data.tableHtml && !data.chart && !data.suggestions) {
+        addMessage(data.reply, false);
+        return;
+      }
+
+      // New envelope: render rich reply (tables/chips/charts)
+      addBotResponse(data || { reply: "Sorry, I couldn't understand that." });
+
+    } catch (err) {
+      console.error('Network error calling chat API:', err);
+      addMessage("Oops! Something went wrong while contacting the AI.", false);
+    }
+  }
+
+  // Send handlers
+  async function sendMessage() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+    addMessage(message, true);
+    chatInput.value = '';
+    showTypingIndicator();
+    await new Promise(r => setTimeout(r, 500));
+    await sendToBackend(message);
+    removeTypingIndicator();
+  }
+  async function sendDesktopMessage() {
+    const message = chatInputDesktop.value.trim();
+    if (!message) return;
+    addMessage(message, true);
+    chatInputDesktop.value = '';
+    showTypingIndicator();
+    await new Promise(r => setTimeout(r, 500));
+    await sendToBackend(message);
+    removeTypingIndicator();
+  }
+
+  // Wire events
+  sendButton.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); sendMessage(); }
+  });
+  if (sendButtonDesktop && chatInputDesktop) {
+    sendButtonDesktop.addEventListener('click', sendDesktopMessage);
+    chatInputDesktop.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); sendDesktopMessage(); }
+    });
+  }
+});
+
+// Quick-suggestion tap
+function askQuestion(question) {
+  const chatInput = document.getElementById('chatInput');
+  chatInput.value = question;
+  document.getElementById('sendButton').click();
+}
+</script>
+</body>
+</html>

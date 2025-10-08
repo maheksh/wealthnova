@@ -3,16 +3,17 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 
-// Load Poppins (weights 400, 500, 600, 700)
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-poppins',
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'WealthNova',
   description: 'AI Financial Advisors',
+  // Next.js auto-adds viewport, but you can explicitly set it:
+  viewport: 'width=device-width, initial-scale=1',
 };
 
 export default function RootLayout({

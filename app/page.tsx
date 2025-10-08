@@ -33,33 +33,39 @@ export default function HomePage() {
             required
           />
           <button type="submit" className="btn btn-subscribe">
-            Subscribe to Insights
+            Subscribe 
           </button>
         </form>
       </section>
 
       <section className="section">
-        <h2 className="section-title">SPECIAL BOTS</h2>
-
-        <div className="bot-card">
-          <h3 className="bot-title">💡 Insurance Advisor</h3>
-          <ul className="bot-features">
-            <li>Compare 50+ policy providers</li>
-            <li>Personalized risk assessment</li>
-            <li>Instant claim support</li>
-          </ul>
-          <button className="btn btn-chat">Start Chat</button>
+       <h2 className="section-title section-title-left">Special Bots</h2>
+        {/* Insurance Advisor */}
+        <div className="bot-card-container">
+          <div className="bot-card">
+            <div className="bot-content">
+              <h3 className="bot-title">💡 Insurance Advisor</h3>
+              <ul className="bot-features">
+                <li>POLICY COMPARISON</li>
+                <li>PERSONALIZED GUIDANCE</li>
+              </ul>
+            </div>
+          </div>
+          <button className="btn btn-chat attached">Start Chat</button>
         </div>
 
-        <div className="bot-card">
-          <h3 className="bot-title">📈 Investment Advisor</h3>
-          <ul className="bot-features">
-            <li>AI-driven stock analysis</li>
-            <li>Real-time market alerts</li>
-            <li>Portfolio diversification tips</li>
-            <li>Retirement planning tools</li>
-          </ul>
-          <button className="btn btn-chat">Start Chat</button>
+        {/* Investment Advisor */}
+        <div className="bot-card-container">
+          <div className="bot-card">
+            <div className="bot-content">
+              <h3 className="bot-title">📈 Investment Advisor</h3>
+              <ul className="bot-features">
+                <li>STOCK RESEARCH</li>
+                <li>MARKET TRENDS</li>
+              </ul>
+            </div>
+          </div>
+          <button className="btn btn-chat attached">Start Chat</button>
         </div>
 
         <div className="divider-above-input"></div>

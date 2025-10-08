@@ -10,7 +10,7 @@ body {
   color: #e0e0e0;
   min-height: 100vh;
   font-feature-settings: "liga" 1;
-  overflow-y: hidden; /* Prevents scrollbar */
+  /* Remove overflow-y: hidden — it hides content on mobile */
 }
 
 /* Fixed Navbar */
@@ -21,7 +21,7 @@ body {
   width: 100%;
   background: rgba(18, 18, 18, 0.95);
   backdrop-filter: blur(8px);
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1rem;
   z-index: 1000;
   display: flex;
   justify-content: center;
@@ -39,11 +39,11 @@ body {
   letter-spacing: -0.35px;
 }
 
-/* Main content - NO SCROLLBAR */
+/* Main content - FIXED */
 .main-content {
-  margin-top: 50px; /* Clears navbar */
-  padding: 1.3rem 1.1rem 0.5rem; /* Reduced bottom padding */
-  min-height: calc(100vh - 60px); /* Matches margin-top */
+  margin-top: 70px; /* Increased to clear navbar safely */
+  padding: 1.2rem 1rem 1rem; /* Balanced padding */
+  min-height: calc(100vh - 70px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,13 +53,13 @@ body {
 .section {
   width: 100%;
   max-width: 560px;
-  margin: 0 auto 1rem;
+  margin: 0 auto 1.2rem;
 }
 
 .section-title {
   font-size: 1.4rem;
   font-weight: 700;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
   background: linear-gradient(90deg, #D5AD2A, #F6D973);
   -webkit-background-clip: text;
   background-clip: text;
@@ -89,10 +89,11 @@ body {
   box-shadow: 0 0 0 2px rgba(213, 173, 42, 0.2), 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
+/* FIXED: Remove width/margin, make it full-width */
 .btn-subscribe {
   background: linear-gradient(135deg, #D5AD2A, #B89520);
   color: #121212;
-  width: 50%;
+  width: 100%; /* Full width */
   font-weight: 700;
   padding: 0.75rem;
   font-size: 0.94rem;
@@ -100,8 +101,7 @@ body {
   border: none;
   cursor: pointer;
   transition: all 0.25s ease;
-  margin-left: 9rem;
-  margin-top: 0.1rem;
+  margin-top: 0.5rem; /* Small top margin */
 }
 
 .btn-subscribe:hover {
@@ -114,14 +114,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   width: 100%;
   max-width: 560px;
 }
 
 .bot-card {
   background: linear-gradient(145deg, #1a1a1a, #252525);
-  padding: 1.35rem 1.15rem;
+  padding: 1.3rem 1.1rem;
   border: 1px solid rgba(213, 173, 42, 0.1);
   border-radius: 14px 14px 20px 20px;
   width: 100%;
@@ -138,18 +138,14 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0.9rem;
+  gap: 0.85rem;
   width: 100%;
 }
 
 .bot-title {
-  font-size: 1.22rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #D5AD2A;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
   margin: 0;
 }
 
@@ -164,10 +160,9 @@ body {
 .bot-features li {
   position: relative;
   padding-left: 22px;
-  margin-bottom: 0.6rem;
-  font-size: 0.94rem;
+  margin-bottom: 0.55rem;
+  font-size: 0.92rem;
   color: #d0d0d0;
-  line-height: 1.4;
 }
 
 .bot-features li::before {
@@ -176,14 +171,9 @@ body {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.48rem;
+  font-size: 1.45rem;
   color: #D5AD2A;
   opacity: 0.9;
-  transition: transform 0.2s ease;
-}
-
-.bot-features li:hover::before {
-  transform: translateY(-50%) scale(1.15);
 }
 
 /* Attached Button */
@@ -193,27 +183,18 @@ body {
   border: none;
   border-top: 1px solid rgba(213, 173, 42, 0.1);
   border-radius: 0 0 14px 14px;
-  padding: 0.55rem 1.18rem;
-  font-size: 0.87rem;
+  padding: 0.52rem 1.15rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.3px;
-  cursor: pointer;
-  transition: all 0.25s ease;
   width: auto;
   margin-top: -1px;
-  
-}
-
-.btn-chat.attached:hover {
-  transform: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Divider */
 .divider-above-input {
   height: 1px;
   background: linear-gradient(to right, transparent, rgba(213, 173, 42, 0.5), transparent);
-  margin: 1.6rem auto;
+  margin: 1.4rem auto;
   width: 70%;
   max-width: 500px;
 }
@@ -222,7 +203,7 @@ body {
 .ask-form {
   display: flex;
   gap: 0.8rem;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   justify-content: center;
   width: 100%;
   max-width: 500px;
@@ -230,7 +211,7 @@ body {
 
 .ask-form .input {
   padding: 0.7rem 1rem;
-  font-size: 0.94rem;
+  font-size: 0.92rem;
 }
 
 .btn-send {
@@ -238,60 +219,60 @@ body {
   color: #121212;
   border: none;
   border-radius: 10px;
-  font-size: 1.18rem;
+  font-size: 1.15rem;
   font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 42px;
-  transition: all 0.25s ease;
+  width: 46px;
+  height: 40px;
 }
 
-.btn-send:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(213, 173, 42, 0.6);
-}
-
-/* Mobile */
+/* MOBILE-FIRST RESPONSIVE DESIGN */
 @media (max-width: 640px) {
   .navbar {
-    padding: 0.7rem 1.1rem;
+    padding: 0.55rem 0.9rem;
   }
 
   .navbar h1 {
-    font-size: 1.65rem;
+    font-size: 1.55rem;
   }
 
   .main-content {
-    margin-top: 60px;
-    padding: 1.1rem 1rem 0.4rem;
+    margin-top: 66px;
+    padding: 1rem 0.8rem 0.9rem;
   }
 
-  .section-title {
-    font-size: 1.35rem;
+  .section {
+    margin-bottom: 1rem;
+  }
+
+  .bot-card-container {
+    margin-bottom: 1rem;
   }
 
   .bot-card {
-    padding: 1.25rem 1.05rem;
+    padding: 1.15rem 1rem;
     border-radius: 12px 12px 18px 18px;
   }
 
   .btn-chat.attached {
-    padding: 0.52rem 1.12rem;
-    font-size: 0.85rem;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.82rem;
     border-radius: 0 0 12px 12px;
+  }
+
+  .divider-above-input {
+    margin: 1.2rem auto;
   }
 
   .ask-form {
     flex-direction: column;
+    gap: 0.7rem;
+    margin-top: 0.7rem;
   }
 
   .btn-send {
     width: 100%;
     height: auto;
-    padding: 0.75rem;
-    font-size: 1.12rem;
+    padding: 0.7rem;
+    font-size: 1.1rem;
   }
 }

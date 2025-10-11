@@ -6,6 +6,7 @@ import { useState } from 'react';
 export default function HomePage() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [activeBot, setActiveBot] = useState<'insurance' | 'investment' | null>(null);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,40 +33,50 @@ export default function HomePage() {
             className="input"
             required
           />
-          <button type="submit" className="btn btn-subscribe">
-            Subscribe 
+          <button type="submit" className="btn-subscribe">
+            Subscribe
           </button>
         </form>
       </section>
 
       <section className="section">
-       <h2 className="section-title section-title-left">Special Bots</h2>
-        {/* Insurance Advisor */}
-        <div className="bot-card-container">
-          <div className="bot-card">
-            <div className="bot-content">
-              <h3 className="bot-title">💡 Insurance Advisor</h3>
-              <ul className="bot-features">
-                <li>POLICY COMPARISON</li>
-                <li>PERSONALIZED GUIDANCE</li>
-              </ul>
-            </div>
-          </div>
-          <button className="btn btn-chat attached">Start Chat</button>
-        </div>
+        <h2 className="section-title section-title-left">Special Bots</h2>
 
-        {/* Investment Advisor */}
-        <div className="bot-card-container">
-          <div className="bot-card">
-            <div className="bot-content">
-              <h3 className="bot-title">📈 Investment Advisor</h3>
-              <ul className="bot-features">
-                <li>STOCK RESEARCH</li>
-                <li>MARKET TRENDS</li>
-              </ul>
+        {/* Desktop: Side-by-side | Mobile: Stacked */}
+        <div className="bots-container">
+          {/* Insurance Advisor */}
+          <div 
+            className={`bot-card-container ${activeBot === 'insurance' ? 'active' : ''}`}
+            onClick={() => setActiveBot('insurance')}
+          >
+            <div className="bot-card">
+              <div className="bot-content">
+                <h3 className="bot-title">💡 Insurance Advisor</h3>
+                <ul className="bot-features">
+                  <li>Policy Comparison</li>
+                  <li>Personalized Guidance</li>
+                </ul>
+              </div>
             </div>
+            <button className="btn-chat attached">Start Chat</button>
           </div>
-          <button className="btn btn-chat attached">Start Chat</button>
+
+          {/* Investment Advisor */}
+          <div 
+            className={`bot-card-container ${activeBot === 'investment' ? 'active' : ''}`}
+            onClick={() => setActiveBot('investment')}
+          >
+            <div className="bot-card">
+              <div className="bot-content">
+                <h3 className="bot-title">📈 Investment Advisor</h3>
+                <ul className="bot-features">
+                  <li>Stock Research</li>
+                  <li>Market Trends</li>
+                </ul>
+              </div>
+            </div>
+            <button className="btn-chat attached">Start Chat</button>
+          </div>
         </div>
 
         <div className="divider-above-input"></div>
@@ -73,7 +84,7 @@ export default function HomePage() {
         <form onSubmit={handleSendMessage} className="ask-form">
           <input
             type="text"
-            placeholder="Ask about stocks, insurance, or wealth..."
+            placeholder="Ask About Finance..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className="input"

@@ -20,6 +20,17 @@ export default function HomePage() {
     setMessage('');
   };
 
+  // Handle bot clicks
+  const handleInsuranceChat = () => {
+    alert('Starting chat with Insurance Advisor...');
+    setActiveBot('insurance');
+  };
+
+  const handleInvestmentChat = () => {
+    alert('Starting chat with Investment Advisor...');
+    setActiveBot('investment');
+  };
+
   return (
     <>
       <section className="section">
@@ -42,7 +53,6 @@ export default function HomePage() {
       <section className="section">
         <h2 className="section-title section-title-left">Special Bots</h2>
 
-        {/* Desktop: Side-by-side | Mobile: Stacked */}
         <div className="bots-container">
           {/* Insurance Advisor */}
           <div 
@@ -58,7 +68,15 @@ export default function HomePage() {
                 </ul>
               </div>
             </div>
-            <button className="btn-chat attached">Start Chat</button>
+            <button 
+              className="btn-chat attached"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent card click from triggering
+                handleInsuranceChat();
+              }}
+            >
+              Start Chat
+            </button>
           </div>
 
           {/* Investment Advisor */}
@@ -75,7 +93,15 @@ export default function HomePage() {
                 </ul>
               </div>
             </div>
-            <button className="btn-chat attached">Start Chat</button>
+            <button 
+              className="btn-chat attached"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent card click from triggering
+                handleInvestmentChat();
+              }}
+            >
+              Start Chat
+            </button>
           </div>
         </div>
 
